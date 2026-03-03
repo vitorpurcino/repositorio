@@ -34,4 +34,49 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         toggleBtn.innerHTML = isDark ? '☀️' : '🌙';
     });
+
+    // --- Search functionality ---
+    const h1 = document.querySelector('h1');
+    if (h1) {
+        const searchContainer = document.createElement('div');
+        searchContainer.className = 'search-wrapper';
+        searchContainer.innerHTML = `
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="commandSearch" placeholder="Pesquisar comando ou descrição...">
+            </div>
+        `;
+        h1.after(searchContainer);
+
+        const searchInput = document.getElementById('commandSearch');
+        const tables = document.querySelectorAll('table');
+        const headings = document.querySelectorAll('h2');
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+
+            tables.forEach((table, index) => {
+                const rows = table.querySelectorAll('tbody tr');
+                let hasVisibleRow = false;
+
+                rows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    if (text.includes(term)) {
+                        row.style.display = '';
+                        hasVisibleRow = true;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+
+                // Hide table if empty
+                table.style.display = hasVisibleRow ? '' : 'none';
+                
+                // Hide corresponding h2
+                if (headings[index]) {
+                    headings[index].style.display = hasVisibleRow ? '' : 'none';
+                }
+            });
+        });
+    }
 });
