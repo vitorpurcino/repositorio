@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="comandosBladeLaravel.css">
+    <title>Comandos e Diretivas do Blade no Laravel</title>
+</head>
+
+<body>
+    <h1><a href="../index.html">Comandos e Diretivas do Blade no Laravel</a></h1>
+
+    <h2>🔁 Estruturas de Controle</h2>
+
+    <h3>Condicionais</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Diretiva</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>@if</code> / <code>@elseif</code> / <code>@else</code> / <code>@endif</code></td>
+                <td>Condicional padrão</td>
+            </tr>
+            <tr>
+                <td><code>@unless</code> / <code>@endunless</code></td>
+                <td>Executa se a condição for <strong>falsa</strong></td>
+            </tr>
+            <tr>
+                <td><code>@isset</code> / <code>@endisset</code></td>
+                <td>Verifica se variável está definida</td>
+            </tr>
+            <tr>
+                <td><code>@empty</code> / <code>@endempty</code></td>
+                <td>Verifica se variável está vazia</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <pre><code class="language-blade">@if($user->isAdmin())
+    &lt;p&gt;Admin&lt;/p&gt;
+@elseif($user->isModerator())
+    &lt;p&gt;Moderador&lt;/p&gt;
+@else
+    &lt;p&gt;Usuário&lt;/p&gt;
+@endif
+
+@unless($user->isLoggedIn())
+    &lt;p&gt;Por favor, faça login.&lt;/p&gt;
+@endunless</code></pre>
+
+    <h3>Switch</h3>
+    <pre><code class="language-blade">@switch($status)
+    @case('ativo')
+        &lt;p&gt;Ativo&lt;/p&gt;
+        @break
+    @case('inativo')
+        &lt;p&gt;Inativo&lt;/p&gt;
+        @break
+    @default
+        &lt;p&gt;Desconhecido&lt;/p&gt;
+@endswitch</code></pre>
+
+    <h2>🔄 Loops</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Diretiva</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>@for</code> / <code>@endfor</code></td>
+                <td>Loop numérico</td>
+            </tr>
+            <tr>
+                <td><code>@foreach</code> / <code>@endforeach</code></td>
+                <td>Itera sobre coleções</td>
+            </tr>
+            <tr>
+                <td><code>@forelse</code> / <code>@empty</code> / <code>@endforelse</code></td>
+                <td><code>foreach</code> com fallback para vazio</td>
+            </tr>
+            <tr>
+                <td><code>@while</code> / <code>@endwhile</code></td>
+                <td>Loop condicional</td>
+            </tr>
+            <tr>
+                <td><code>@break</code></td>
+                <td>Interrompe o loop</td>
+            </tr>
+            <tr>
+                <td><code>@continue</code></td>
+                <td>Pula para a próxima iteração</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <pre><code class="language-blade">@foreach($users as $user)
+    &lt;p&gt;{{ $user->name }}&lt;/p&gt;
+@endforeach
+
+@forelse($products as $product)
+    &lt;p&gt;{{ $product->name }}&lt;/p&gt;
+@empty
+    &lt;p&gt;Nenhum produto encontrado.&lt;/p&gt;
+@endforelse</code></pre>
+
+    <div class="note">
+        Dentro de loops, a variável <code>$loop</code> fornece informações úteis como <code>$loop->index</code>,
+        <code>$loop->first</code>, <code>$loop->last</code>, <code>$loop->count</code>, etc.
+    </div>
+
+    <h2>📤 Exibição de Dados</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Diretiva / Sintaxe</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>{{ $var }}</code></td>
+                <td>Exibe valor com escape HTML</td>
+            </tr>
+            <tr>
+                <td><code>{!! $var !!}</code></td>
+                <td>Exibe valor <strong>sem</strong> escape (HTML bruto)</td>
+            </tr>
+            <tr>
+                <td><code>{{ $var ?? 'padrão' }}</code></td>
+                <td>Exibe valor ou padrão se nulo</td>
+            </tr>
+            <tr>
+                <td><code>@{{ }}</code></td>
+                <td>Escapa as chaves (útil com Vue/Angular)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <pre><code class="language-blade">{{ $user->name }}          {{-- com escape --}}
+{!! $user->bio !!}         {{-- sem escape --}}
+{{ $title ?? 'Sem título' }}
+@{{ variavel }}            {{-- renderiza literalmente: {{ variavel }} --}}</code></pre>
+
+    <h2>🧩 Layouts e Componentes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Diretiva</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>@extends('layout')</code></td>
+                <td>Herda um layout base</td>
+            </tr>
+            <tr>
+                <td><code>@section</code> / <code>@endsection</code></td>
+                <td>Define uma seção de conteúdo</td>
+            </tr>
+            <tr>
+                <td><code>@yield('nome')</code></td>
+                <td>Marca onde a seção será inserida</td>
+            </tr>
+            <tr>
+                <td><code>@include('view')</code></td>
+                <td>Inclui outra view</td>
+            </tr>
+            <tr>
+                <td><code>@includeIf</code></td>
+                <td>Inclui somente se a view existir</td>
+            </tr>
+            <tr>
+                <td><code>@includeWhen</code></td>
+                <td>Inclui condicionalmente</td>
+            </tr>
+            <tr>
+                <td><code>@includeUnless</code></td>
+                <td>Inclui se condição for falsa</td>
+            </tr>
+            <tr>
+                <td><code>@each</code></td>
+                <td>Inclui view para cada item de coleção</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <pre><code class="language-blade">&lt;!-- layout.blade.php --&gt;
+&lt;html&gt;
+&lt;body&gt;
+    @yield('content')
+&lt;/body&gt;
+&lt;/html&gt;
+
+&lt;!-- page.blade.php --&gt;
+@extends('layout')
+
+@section('content')
+    &lt;p&gt;Este é o conteúdo da página.&lt;/p&gt;
+@endsection</code></pre>
+
+    <script src="theme.js"></script>
+</body>
+
+</html>

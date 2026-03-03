@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="DevNotes - Seu bloco de notas inteligente para comandos e guias de desenvolvimento." />
+	<meta name="keywords" content="devnotes, programação, comandos, cheat sheet, laravel, git, php, blade" />
+	<meta name="author" content="Vitor Purcino" />
+	<meta name="theme-color" content="#020617" />
+
+	<!-- Open Graph -->
+	<meta property="og:title" content="DevNotes - Inteligência em Comandos" />
+	<meta property="og:description" content="Acesse rapidamente os comandos mais úteis para o seu dia a dia." />
+	<meta property="og:type" content="website" />
+
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="reset.css" />
+	<link rel="stylesheet" href="index.css" />
+	<title>DevNotes - Central de Comandos</title>
+</head>
+
+<body>
+	<header>
+		<div class="header-container">
+			<div class="title-group">
+				<h1>DEVNOTES</h1>
+				<p class="tagline">Sua central inteligente de comandos</p>
+			</div>
+
+			<div class="search-container">
+				<span class="search-icon">🔍</span>
+				<input type="text" class="search-input" id="searchBar"
+					placeholder="Pesquisar comandos ou ferramentas..." />
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<div class="section-header">
+			<h2 class="section-title">GUIA DE COMANDOS</h2>
+			<p class="data-publicacao" id="dataHoje"></p>
+		</div>
+
+		<div class="cards-grid" id="cardsGrid">
+			<!-- Artisan Card -->
+			<article class="card">
+				<span class="card-tag tag-artisan">Laravel Artisan</span>
+				<h3><a href="./pages/comandosArtisan.html">Cheat Sheet Completo do Artisan</a></h3>
+				<p class="card-desc">
+					Lista descritiva de todos os comandos PHP ARTISAN para facilitar seu workflow no Laravel 12.
+				</p>
+				<div class="card-footer">
+					<span class="card-meta">v12.52.0</span>
+					<a href="./pages/comandosArtisan.html" class="btn-read">Ver comandos →</a>
+				</div>
+			</article>
+
+			<!-- Blade Card -->
+			<article class="card">
+				<span class="card-tag tag-blade">Blade Engine</span>
+				<h3><a href="./pages/comandosBladeLaravel.html">Diretivas Blade Essenciais</a></h3>
+				<p class="card-desc">
+					Guia rápido sobre as diretivas e comandos do Blade no Laravel com exemplos práticos de uso.
+				</p>
+				<div class="card-footer">
+					<span class="card-meta">Laravel 11+</span>
+					<a href="pages/comandosBladeLaravel.html" class="btn-read">Ver guia →</a>
+				</div>
+			</article>
+
+			<!-- Git Card -->
+			<article class="card">
+				<span class="card-tag tag-git">Git SCM</span>
+				<h3><a href="pages/comandosGit.html">Mestre do Git: Comandos Úteis</a></h3>
+				<p class="card-desc">
+					Nunca mais esqueça como fazer um rebase ou consertar um commit. Guia completo de Git.
+				</p>
+				<div class="card-footer">
+					<span class="card-meta">Essentials</span>
+					<a href="pages/comandosGit.html" class="btn-read">Dominar Git →</a>
+				</div>
+			</article>
+		</div>
+
+		<!-- Newsletter Section -->
+		<!-- <section class="newsletter">
+			<div class="newsletter-content">
+				<h2>Mantenha-se Atualizado</h2>
+				<p>Receba novos guias e atualizações de comandos diretamente no seu e-mail.</p>
+			</div>
+			<form class="newsletter-form" id="newsletterForm">
+				<input type="email" placeholder="seu@email.com" required />
+				<button type="submit" class="btn-submit">Inscrever-se</button>
+			</form>
+		</section> -->
+	</main>
+
+	<footer>
+		<div class="footer-container">
+			<div class="footer-info">
+				<p>&copy; 2026 <span class="footer-brand">DevNotes</span>. Todos os direitos reservados.</p>
+			</div>
+			<div class="footer-info">
+				<p>Curadoria por <strong>Vitor Purcino</strong></p>
+			</div>
+		</div>
+	</footer>
+
+	<script src="index.js"></script>
+	<script>
+		// Exibir data atual formatada
+		const opcoesDatas = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+		const dataAtual = new Date().toLocaleDateString('pt-BR', opcoesDatas);
+		document.getElementById('dataHoje').textContent = dataAtual.charAt(0).toUpperCase() + dataAtual.slice(1);
+
+		// Preview de animação nos cards (radial gradient highlight)
+		document.querySelectorAll('.card').forEach(card => {
+			card.addEventListener('mousemove', e => {
+				const rect = card.getBoundingClientRect();
+				const x = e.clientX - rect.left;
+				const y = e.clientY - rect.top;
+				card.style.setProperty('--mouse-x', `${x}px`);
+				card.style.setProperty('--mouse-y', `${y}px`);
+			});
+		});
+	</script>
+</body>
+
+</html>

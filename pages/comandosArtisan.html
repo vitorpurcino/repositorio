@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="comandosArtisan.css">
+    <title>Cheat Sheet Completo do Artisan – Laravel 12.52.0</title>
+</head>
+
+<body>
+
+    <h1><a href="../index.html">Cheat Sheet Completo do Artisan – Laravel 12.52.0</a></h1>
+
+    <div class="note">
+        <strong>Dica:</strong> Use <code>php artisan list</code> para ver todos os comandos disponíveis. Use
+        <code>php artisan help [comando]</code> para detalhes.
+    </div>
+
+    <h2>🔧 Comandos Básicos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan about</code></td>
+                <td>Exibe informações básicas sobre a aplicação</td>
+            </tr>
+            <tr>
+                <td><code>php artisan clear-compiled</code></td>
+                <td>Remove o arquivo de classes compiladas</td>
+            </tr>
+            <tr>
+                <td><code>php artisan completion</code></td>
+                <td>Gera script de auto-completar para shell</td>
+            </tr>
+            <tr>
+                <td><code>php artisan db</code></td>
+                <td>Inicia uma sessão CLI do banco de dados</td>
+            </tr>
+            <tr>
+                <td><code>php artisan docs</code></td>
+                <td>Acessa a documentação do Laravel</td>
+            </tr>
+            <tr>
+                <td><code>php artisan down</code></td>
+                <td>Coloca a aplicação em modo manutenção/demo</td>
+            </tr>
+            <tr>
+                <td><code>php artisan env</code></td>
+                <td>Exibe o ambiente atual (ex.: local, production)</td>
+            </tr>
+            <tr>
+                <td><code>php artisan help</code></td>
+                <td>Exibe ajuda para um comando específico</td>
+            </tr>
+            <tr>
+                <td><code>php artisan inspire</code></td>
+                <td>Exibe uma frase inspiradora</td>
+            </tr>
+            <tr>
+                <td><code>php artisan list</code></td>
+                <td>Lista todos os comandos disponíveis</td>
+            </tr>
+            <tr>
+                <td><code>php artisan migrate</code></td>
+                <td>Executa as migrações do banco</td>
+            </tr>
+            <tr>
+                <td><code>php artisan optimize</code></td>
+                <td>Cacheia bootstrap, configuração e metadados</td>
+            </tr>
+            <tr>
+                <td><code>php artisan pail</code></td>
+                <td>Monitora os logs da aplicação</td>
+            </tr>
+            <tr>
+                <td><code>php artisan reload</code></td>
+                <td>Recarrega serviços em execução</td>
+            </tr>
+            <tr>
+                <td><code>php artisan serve</code></td>
+                <td>Serve a aplicação no servidor PHP de desenvolvimento</td>
+            </tr>
+            <tr>
+                <td><code>php artisan test</code></td>
+                <td>Executa os testes da aplicação</td>
+            </tr>
+            <tr>
+                <td><code>php artisan tinker</code></td>
+                <td>Interage com a aplicação via REPL</td>
+            </tr>
+            <tr>
+                <td><code>php artisan up</code></td>
+                <td>Remove o modo manutenção</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>⚙️ Auth</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan auth:clear-resets</code></td>
+                <td>Limpa tokens expirados de reset de senha</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🗃️ Cache</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan cache:clear</code></td>
+                <td>Limpa o cache da aplicação</td>
+            </tr>
+            <tr>
+                <td><code>php artisan cache:forget</code></td>
+                <td>Remove um item do cache</td>
+            </tr>
+            <tr>
+                <td><code>php artisan cache:prune-stale-tags</code></td>
+                <td>Remove tags de cache obsoletas (Redis)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>📬 Channel</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan channel:list</code></td>
+                <td>Lista todos os canais privados registrados</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>⚙️ Config</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan config:cache</code></td>
+                <td>Cria arquivo de cache de configuração</td>
+            </tr>
+            <tr>
+                <td><code>php artisan config:clear</code></td>
+                <td>Remove arquivo de cache de configuração</td>
+            </tr>
+            <tr>
+                <td><code>php artisan config:publish</code></td>
+                <td>Publica arquivos de configuração de pacotes</td>
+            </tr>
+            <tr>
+                <td><code>php artisan config:show</code></td>
+                <td>Exibe valores de configuração</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🔧 DB</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan db:monitor</code></td>
+                <td>Monitora conexões no banco especificado</td>
+            </tr>
+            <tr>
+                <td><code>php artisan db:seed</code></td>
+                <td>Popula banco com seeders</td>
+            </tr>
+            <tr>
+                <td><code>php artisan db:show</code></td>
+                <td>Exibe info do banco especificado</td>
+            </tr>
+            <tr>
+                <td><code>php artisan db:table</code></td>
+                <td>Exibe estrutura de tabela</td>
+            </tr>
+            <tr>
+                <td><code>php artisan db:wipe</code></td>
+                <td>Remove todas as tabelas, views e tipos</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🔐 Env</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan env:decrypt</code></td>
+                <td>Descriptografa um arquivo de ambiente</td>
+            </tr>
+            <tr>
+                <td><code>php artisan env:encrypt</code></td>
+                <td>Encriptografa um arquivo de ambiente</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>📢 Event</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan event:cache</code></td>
+                <td>Descobre e cacheia eventos e listeners</td>
+            </tr>
+            <tr>
+                <td><code>php artisan event:clear</code></td>
+                <td>Limpa todos os eventos e listeners cacheados</td>
+            </tr>
+            <tr>
+                <td><code>php artisan event:list</code></td>
+                <td>Lista eventos e listeners da aplicação</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🛠️ Install</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan install:api</code></td>
+                <td>Cria arquivo de rotas API e instala Sanctum/Passport</td>
+            </tr>
+            <tr>
+                <td><code>php artisan install:broadcasting</code></td>
+                <td>Cria arquivo de rotas de broadcast</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🔑 Key</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan key:generate</code></td>
+                <td>Define a chave da aplicação</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🌐 Lang</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan lang:publish</code></td>
+                <td>Publica arquivos de idioma para customização</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🏗️ Make</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan make:cache-table</code></td>
+                <td>Cria migração para tabela de cache</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:cast</code></td>
+                <td>Cria classe de cast personalizado</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:channel</code></td>
+                <td>Cria classe de canal</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:class</code></td>
+                <td>Cria nova classe</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:command</code></td>
+                <td>Cria novo comando Artisan</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:component</code></td>
+                <td>Cria nova classe de componente Blade</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:config</code></td>
+                <td>Cria novo arquivo de configuração</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:controller</code></td>
+                <td>Cria novo controller</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:enum</code></td>
+                <td>Cria novo enum</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:event</code></td>
+                <td>Cria novo evento</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:exception</code></td>
+                <td>Cria nova exceção personalizada</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:factory</code></td>
+                <td>Cria nova factory de model</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:interface</code></td>
+                <td>Cria nova interface</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:job</code></td>
+                <td>Cria novo job</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:job-middleware</code></td>
+                <td>Cria novo middleware de job</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:listener</code></td>
+                <td>Cria novo listener de evento</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:mail</code></td>
+                <td>Cria nova classe de e-mail</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:middleware</code></td>
+                <td>Cria novo middleware HTTP</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:migration</code></td>
+                <td>Cria nova migração</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:model</code></td>
+                <td>Cria novo model</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:notification</code></td>
+                <td>Cria nova notificação</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:notifications-table</code></td>
+                <td>Cria migração para tabela de notificações</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:observer</code></td>
+                <td>Cria novo observer</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:policy</code></td>
+                <td>Cria nova policy de autorização</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:provider</code></td>
+                <td>Cria novo service provider</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:queue-batches-table</code></td>
+                <td>Cria migração para tabela de batches</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:queue-failed-table</code></td>
+                <td>Cria migração para tabela de jobs falhados</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:queue-table</code></td>
+                <td>Cria migração para tabela de jobs da fila</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:request</code></td>
+                <td>Cria nova classe de request</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:resource</code></td>
+                <td>Cria novo resource</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:rule</code></td>
+                <td>Cria nova regra de validação</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:scope</code></td>
+                <td>Cria nova classe de scope</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:seeder</code></td>
+                <td>Cria novo seeder</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:session-table</code></td>
+                <td>Cria migração para tabela de sessões</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:test</code></td>
+                <td>Cria novo teste</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:trait</code></td>
+                <td>Cria novo trait</td>
+            </tr>
+            <tr>
+                <td><code>php artisan make:view</code></td>
+                <td>Cria nova view</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🔧 Migrate</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan migrate:fresh</code></td>
+                <td>Remove todas as tabelas e reexecuta migrações</td>
+            </tr>
+            <tr>
+                <td><code>php artisan migrate:install</code></td>
+                <td>Cria repositório de migrações</td>
+            </tr>
+            <tr>
+                <td><code>php artisan migrate:refresh</code></td>
+                <td>Reinicia e reexecuta todas as migrações</td>
+            </tr>
+            <tr>
+                <td><code>php artisan migrate:reset</code></td>
+                <td>Reverte todas as migrações</td>
+            </tr>
+            <tr>
+                <td><code>php artisan migrate:rollback</code></td>
+                <td>Reverte a última migração</td>
+            </tr>
+            <tr>
+                <td><code>php artisan migrate:status</code></td>
+                <td>Exibe status de todas as migrações</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🧬 Model</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan model:prune</code></td>
+                <td>Limpa modelos não mais necessários</td>
+            </tr>
+            <tr>
+                <td><code>php artisan model:show</code></td>
+                <td>Exibe informações sobre um model</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>⚙️ Optimize</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan optimize:clear</code></td>
+                <td>Remove arquivos de cache de bootstrap</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>📦 Package</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan package:discover</code></td>
+                <td>Reconstrói manifesto de pacotes</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>📦 Queue</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan queue:clear</code></td>
+                <td>Remove todos os jobs de uma fila</td>
+            </tr>
+            <tr>
+                <td><code>php artisan queue:failed</code></td>
+                <td>Lista jobs falhados</td>
+            </tr>
+            <tr>
+                <td><code>php artisan queue:flush</code></td>
+                <td>Remove todos os jobs falhados</td>
+            </tr>
+            <tr>
+                <td><code>php artisan queue:forget</code></td>
+                <td>Remove um job falhado</td>
+            </tr>
+            <tr>
+                <td><code>php artisan queue:listen</code></td>
+                <td>Escuta uma fila específica</td>
+            </tr>
+            <tr>
+                <td><code>php artisan queue:monitor</code></td>
+                <td>Monitora tamanho de filas</td>
+            </tr>
+            <tr>
+                <td><code>php artisan queue:pause</code></td>
+                <td>Pausa processamento de uma fila</td>
+            </tr>
+            <tr>
+                <td><code>php artisan queue:prune-batches</code></td>
+                <td>Remove entradas obsoletas da tabela de batches</td>
+            </tr>
+            <tr>
+                <td><code>php artisan queue:prune-failed</code></td>
+                <td>Remove entradas obsoletas da tabela de jobs falhados</td>
+            </tr>
+            <tr>
+                <td><code>php artisan queue:restart</code></td>
+                <td>Reinicia trabalhadores de fila</td>
+            </tr>
+            <tr>
+                <td><code>php artisan queue:resume</code></td>
+                <td>Reinicia processamento de fila pausada</td>
+            </tr>
+            <tr>
+                <td><code>php artisan queue:retry</code></td>
+                <td>Repete um job falhado</td>
+            </tr>
+            <tr>
+                <td><code>php artisan queue:retry-batch</code></td>
+                <td>Repete jobs falhados de um batch</td>
+            </tr>
+            <tr>
+                <td><code>php artisan queue:work</code></td>
+                <td>Inicia processamento de jobs</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>📆 Schedule</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan schedule:clear-cache</code></td>
+                <td>Remove arquivos de mutex cacheados</td>
+            </tr>
+            <tr>
+                <td><code>php artisan schedule:interrupt</code></td>
+                <td>Interrompe execução atual do cron</td>
+            </tr>
+            <tr>
+                <td><code>php artisan schedule:list</code></td>
+                <td>Lista todas as tarefas programadas</td>
+            </tr>
+            <tr>
+                <td><code>php artisan schedule:run</code></td>
+                <td>Executa tarefas programadas</td>
+            </tr>
+            <tr>
+                <td><code>php artisan schedule:test</code></td>
+                <td>Executa uma tarefa programada</td>
+            </tr>
+            <tr>
+                <td><code>php artisan schedule:work</code></td>
+                <td>Inicia trabalhador de cron</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🔧 Schema</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan schema:dump</code></td>
+                <td>Descreve o esquema do banco</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>📦 Storage</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan storage:link</code></td>
+                <td>Cria links simbólicos para armazenamento</td>
+            </tr>
+            <tr>
+                <td><code>php artisan storage:unlink</code></td>
+                <td>Remove links simbólicos existentes</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🔧 Stub</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan stub:publish</code></td>
+                <td>Publica stubs personalizáveis</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>📦 Vendor</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan vendor:publish</code></td>
+                <td>Publica arquivos de pacotes</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>👁️ View</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan view:cache</code></td>
+                <td>Compila todas as views Blade</td>
+            </tr>
+            <tr>
+                <td><code>php artisan view:clear</code></td>
+                <td>Limpa todas as views compiladas</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🌐 Route</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan route:cache</code></td>
+                <td>Cria cache de rotas</td>
+            </tr>
+            <tr>
+                <td><code>php artisan route:clear</code></td>
+                <td>Remove cache de rotas</td>
+            </tr>
+            <tr>
+                <td><code>php artisan route:list</code></td>
+                <td>Lista todas as rotas registradas</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🚀 Sail</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Comando</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>php artisan sail:add</code></td>
+                <td>Adiciona serviço a instalação Sail</td>
+            </tr>
+            <tr>
+                <td><code>php artisan sail:install</code></td>
+                <td>Instala arquivo Docker Compose padrão</td>
+            </tr>
+            <tr>
+                <td><code>php artisan sail:publish</code></td>
+                <td>Publica arquivos Docker do Laravel Sail</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="theme.js"></script>
+</body>
+
+</html>

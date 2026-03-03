@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="comandosGit.css">
+	<title>Cheat Sheet Completo do Git — Comandos, Conceitos e Exemplos</title>
+</head>
+
+<body>
+	<h1><a href="../index.html">Sheet Completo do Git — Comandos, Conceitos e Exemplos</a></h1>
+
+	<div class="note">
+		<strong>Dica:</strong> Use <code>git --help [comando]</code> ou <code>git help [comando]</code> para ajuda
+		detalhada. Use <code>git status</code> sempre que tiver dúvida do estado do repositório.
+	</div>
+
+	<h2>📦 Conceitos Básicos do Git</h2>
+	<ul>
+		<li><strong>Repositório (Repo):</strong> Pasta com histórico de versões do projeto.</li>
+		<li><strong>Working Directory:</strong> Arquivos que você está editando.</li>
+		<li><strong>Staging Area (Index):</strong> Área onde você prepara os arquivos para o commit.</li>
+		<li><strong>Commit:</strong> Ponto de salvamento no histórico (com mensagem).</li>
+		<li><strong>Branch:</strong> Linha de desenvolvimento paralela (ex: main, feature/login).</li>
+		<li><strong>Remote:</strong> Repositório remoto (ex: GitHub, GitLab).</li>
+		<li><strong>HEAD:</strong> Ponteiro para o último commit do branch atual.</li>
+		<li><strong>Origin:</strong> Nome padrão do repositório remoto.</li>
+		<li><strong>SHA-1:</strong> Hash único de cada commit (ex: <code>abc123...</code>).</li>
+	</ul>
+
+	<h2>🔧 Comandos Básicos</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git init</code></td>
+				<td>Inicia um novo repositório Git</td>
+			</tr>
+			<tr>
+				<td><code>git clone [url]</code></td>
+				<td>Clona um repositório remoto</td>
+			</tr>
+			<tr>
+				<td><code>git status</code></td>
+				<td>Mostra estado dos arquivos (modificados, novos, staged)</td>
+			</tr>
+			<tr>
+				<td><code>git add [arquivo]</code></td>
+				<td>Adiciona arquivo ao staging area</td>
+			</tr>
+			<tr>
+				<td><code>git add .</code></td>
+				<td>Adiciona todos os arquivos modificados/novos ao staging</td>
+			</tr>
+			<tr>
+				<td><code>git commit -m "mensagem"</code></td>
+				<td>Cria um commit com mensagem</td>
+			</tr>
+			<tr>
+				<td><code>git log</code></td>
+				<td>Mostra histórico de commits</td>
+			</tr>
+			<tr>
+				<td><code>git log --oneline</code></td>
+				<td>Mostra histórico em uma linha por commit</td>
+			</tr>
+			<tr>
+				<td><code>git diff</code></td>
+				<td>Mostra diferenças entre working directory e staging</td>
+			</tr>
+			<tr>
+				<td><code>git diff --staged</code></td>
+				<td>Mostra diferenças entre staging e último commit</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>🔄 Branches e Merge</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git branch</code></td>
+				<td>Lista todos os branches</td>
+			</tr>
+			<tr>
+				<td><code>git branch [nome]</code></td>
+				<td>Cria um novo branch</td>
+			</tr>
+			<tr>
+				<td><code>git checkout [branch]</code></td>
+				<td>Muda para o branch especificado</td>
+			</tr>
+			<tr>
+				<td><code>git checkout -b [nome]</code></td>
+				<td>Cria e muda para um novo branch</td>
+			</tr>
+			<tr>
+				<td><code>git merge [branch]</code></td>
+				<td>Mescla um branch no atual</td>
+			</tr>
+			<tr>
+				<td><code>git merge --no-ff [branch]</code></td>
+				<td>Mescla com uma mensagem de merge (não fast-forward)</td>
+			</tr>
+			<tr>
+				<td><code>git merge --abort</code></td>
+				<td>Aborta um merge em andamento</td>
+			</tr>
+			<tr>
+				<td><code>git pull</code></td>
+				<td>Busca e mescla repositório remoto</td>
+			</tr>
+			<tr>
+				<td><code>git pull --rebase</code></td>
+				<td>Busca e rebaseia o histórico</td>
+			</tr>
+			<tr>
+				<td><code>git push</code></td>
+				<td>Envia commits para o repositório remoto</td>
+			</tr>
+			<tr>
+				<td><code>git push origin [branch]</code></td>
+				<td>Envia um branch específico</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>🛠️ Comandos Avançados</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git rebase [branch]</code></td>
+				<td>Reescreve commits do branch atual sobre o branch especificado</td>
+			</tr>
+			<tr>
+				<td><code>git rebase -i [branch]</code></td>
+				<td>Abre editor para interação com commits (squash, edit, reword, etc.)</td>
+			</tr>
+			<tr>
+				<td><code>git reset --soft [commit]</code></td>
+				<td>Move HEAD para o commit, mantendo alterações no staging</td>
+			</tr>
+			<tr>
+				<td><code>git reset --mixed [commit]</code></td>
+				<td>Move HEAD para o commit, desfaz staging</td>
+			</tr>
+			<tr>
+				<td><code>git reset --hard [commit]</code></td>
+				<td>Move HEAD para o commit, desfaz tudo (working directory e staging)</td>
+			</tr>
+			<tr>
+				<td><code>git reset --hard HEAD~1</code></td>
+				<td>Desfaz o último commit</td>
+			</tr>
+			<tr>
+				<td><code>git revert [commit]</code></td>
+				<td>Cria um novo commit que desfaz as alterações do commit especificado</td>
+			</tr>
+			<tr>
+				<td><code>git cherry-pick [commit]</code></td>
+				<td>Copia um commit específico para o branch atual</td>
+			</tr>
+			<tr>
+				<td><code>git stash</code></td>
+				<td>Salva alterações pendentes (working directory e staging)</td>
+			</tr>
+			<tr>
+				<td><code>git stash pop</code></td>
+				<td>Recupera o último stash</td>
+			</tr>
+			<tr>
+				<td><code>git stash list</code></td>
+				<td>Lista todos os stashes</td>
+			</tr>
+			<tr>
+				<td><code>git bisect start</code></td>
+				<td>Inicia busca binária para encontrar bug</td>
+			</tr>
+			<tr>
+				<td><code>git bisect good</code></td>
+				<td>Marca commit como "funcionando"</td>
+			</tr>
+			<tr>
+				<td><code>git bisect bad</code></td>
+				<td>Marca commit como "com bug"</td>
+			</tr>
+			<tr>
+				<td><code>git bisect reset</code></td>
+				<td>Reseta a busca binária</td>
+			</tr>
+			<tr>
+				<td><code>git reflog</code></td>
+				<td>Mostra histórico de movimentos do HEAD</td>
+			</tr>
+			<tr>
+				<td><code>git log --graph --oneline --all</code></td>
+				<td>Mostra histórico com visualização de branches</td>
+			</tr>
+			<tr>
+				<td><code>git log --pretty=format:"%h - %an, %ar : %s"</code></td>
+				<td>Formata histórico com detalhes</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>🔐 Segurança e Autenticação</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git config --global user.name "Seu Nome"</code></td>
+				<td>Configura nome de usuário global</td>
+			</tr>
+			<tr>
+				<td><code>git config --global user.email "seu@email.com"</code></td>
+				<td>Configura email global</td>
+			</tr>
+			<tr>
+				<td><code>git config --global credential.helper store</code></td>
+				<td>Armazena credenciais para futuros acessos</td>
+			</tr>
+			<tr>
+				<td><code>git config --global http.sslVerify false</code></td>
+				<td>Desativa verificação SSL (não recomendado)</td>
+			</tr>
+			<tr>
+				<td><code>git config --global http.sslVerify true</code></td>
+				<td>Reativa verificação SSL (recomendado)</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git show [commit]</code></td>
+				<td>Mostra detalhes de um commit</td>
+			</tr>
+			<tr>
+				<td><code>git show [commit]:[arquivo]</code></td>
+				<td>Mostra conteúdo de um arquivo em um commit específico</td>
+			</tr>
+			<tr>
+				<td><code>git show [commit] -- [arquivo]</code></td>
+				<td>Mostra alterações de um arquivo em um commit</td>
+			</tr>
+			<tr>
+				<td><code>git diff [commit1] [commit2]</code></td>
+				<td>Mostra diferenças entre dois commits</td>
+			</tr>
+			<tr>
+				<td><code>git diff [commit1] [commit2] -- [arquivo]</code></td>
+				<td>Mostra diferenças de um arquivo entre dois commits</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Histórico</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git log --graph --oneline --all</code></td>
+				<td>Mostra histórico com visualização de branches</td>
+			</tr>
+			<tr>
+				<td><code>git log --pretty=format:"%h - %an, %ar : %s"</code></td>
+				<td>Formata histórico com detalhes</td>
+			</tr>
+			<tr>
+				<td><code>git log --since="2 weeks ago"</code></td>
+				<td>Mostra commits dos últimos 2 semanas</td>
+			</tr>
+			<tr>
+				<td><code>git log --author="nome"</code></td>
+				<td>Mostra commits de um autor específico</td>
+			</tr>
+			<tr>
+				<td><code>git log --grep="mensagem"</code></td>
+				<td>Mostra commits com mensagem contendo "mensagem"</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Arquivos</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git blame [arquivo]</code></td>
+				<td>Mostra quem modificou cada linha do arquivo</td>
+			</tr>
+			<tr>
+				<td><code>git blame [arquivo] -L 10,20</code></td>
+				<td>Mostra quem modificou linhas 10 a 20 do arquivo</td>
+			</tr>
+			<tr>
+				<td><code>git blame [arquivo] -w</code></td>
+				<td>Ignora espaços em branco ao analisar mudanças</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Tags</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git tag</code></td>
+				<td>Lista todas as tags</td>
+			</tr>
+			<tr>
+				<td><code>git tag -a v1.0 -m "Versão 1.0"</code></td>
+				<td>Cria uma tag anotada</td>
+			</tr>
+			<tr>
+				<td><code>git tag -s v1.0 -m "Versão 1.0"</code></td>
+				<td>Cria uma tag assinada</td>
+			</tr>
+			<tr>
+				<td><code>git push origin --tags</code></td>
+				<td>Envia todas as tags para o repositório remoto</td>
+			</tr>
+			<tr>
+				<td><code>git push origin v1.0</code></td>
+				<td>Envia uma tag específica</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Remotos</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git remote -v</code></td>
+				<td>Mostra remotos configurados</td>
+			</tr>
+			<tr>
+				<td><code>git remote add origin [url]</code></td>
+				<td>Adiciona um novo remoto</td>
+			</tr>
+			<tr>
+				<td><code>git remote remove origin</code></td>
+				<td>Remove um remoto</td>
+			</tr>
+			<tr>
+				<td><code>git remote set-url origin [url]</code></td>
+				<td>Altera a URL de um remoto</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Submodules</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git submodule add [url]</code></td>
+				<td>Adiciona um submodule</td>
+			</tr>
+			<tr>
+				<td><code>git submodule update --init</code></td>
+				<td>Atualiza submodules</td>
+			</tr>
+			<tr>
+				<td><code>git submodule foreach git pull origin master</code></td>
+				<td>Atualiza todos os submodules</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Hooks</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git config --global core.hooksPath ~/.git-hooks</code></td>
+				<td>Configura caminho para hooks</td>
+			</tr>
+			<tr>
+				<td><code>git config --global core.hooksPath ~/.git-hooks</code></td>
+				<td>Configura caminho para hooks</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Configurações</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git config --list</code></td>
+				<td>Mostra todas as configurações</td>
+			</tr>
+			<tr>
+				<td><code>git config --global user.name "Seu Nome"</code></td>
+				<td>Configura nome de usuário global</td>
+			</tr>
+			<tr>
+				<td><code>git config --global user.email "seu@email.com"</code></td>
+				<td>Configura email global</td>
+			</tr>
+			<tr>
+				<td><code>git config --global color.ui true</code></td>
+				<td>Ativa cores nos comandos</td>
+			</tr>
+			<tr>
+				<td><code>git config --global init.defaultBranch main</code></td>
+				<td>Configura branch padrão</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Submodules</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git submodule add [url]</code></td>
+				<td>Adiciona um submodule</td>
+			</tr>
+			<tr>
+				<td><code>git submodule update --init</code></td>
+				<td>Atualiza submodules</td>
+			</tr>
+			<tr>
+				<td><code>git submodule foreach git pull origin master</code></td>
+				<td>Atualiza todos os submodules</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Hooks</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git config --global core.hooksPath ~/.git-hooks</code></td>
+				<td>Configura caminho para hooks</td>
+			</tr>
+			<tr>
+				<td><code>git config --global core.hooksPath ~/.git-hooks</code></td>
+				<td>Configura caminho para hooks</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Configurações</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git config --list</code></td>
+				<td>Mostra todas as configurações</td>
+			</tr>
+			<tr>
+				<td><code>git config --global user.name "Seu Nome"</code></td>
+				<td>Configura nome de usuário global</td>
+			</tr>
+			<tr>
+				<td><code>git config --global user.email "seu@email.com"</code></td>
+				<td>Configura email global</td>
+			</tr>
+			<tr>
+				<td><code>git config --global color.ui true</code></td>
+				<td>Ativa cores nos comandos</td>
+			</tr>
+			<tr>
+				<td><code>git config --global init.defaultBranch main</code></td>
+				<td>Configura branch padrão</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Submodules</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git submodule add [url]</code></td>
+				<td>Adiciona um submodule</td>
+			</tr>
+			<tr>
+				<td><code>git submodule update --init</code></td>
+				<td>Atualiza submodules</td>
+			</tr>
+			<tr>
+				<td><code>git submodule foreach git pull origin master</code></td>
+				<td>Atualiza todos os submodules</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Hooks</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git config --global core.hooksPath ~/.git-hooks</code></td>
+				<td>Configura caminho para hooks</td>
+			</tr>
+			<tr>
+				<td><code>git config --global core.hooksPath ~/.git-hooks</code></td>
+				<td>Configura caminho para hooks</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Configurações</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git config --list</code></td>
+				<td>Mostra todas as configurações</td>
+			</tr>
+			<tr>
+				<td><code>git config --global user.name "Seu Nome"</code></td>
+				<td>Configura nome de usuário global</td>
+			</tr>
+			<tr>
+				<td><code>git config --global user.email "seu@email.com"</code></td>
+				<td>Configura email global</td>
+			</tr>
+			<tr>
+				<td><code>git config --global color.ui true</code></td>
+				<td>Ativa cores nos comandos</td>
+			</tr>
+			<tr>
+				<td><code>git config --global init.defaultBranch main</code></td>
+				<td>Configura branch padrão</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Submodules</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git submodule add [url]</code></td>
+				<td>Adiciona um submodule</td>
+			</tr>
+			<tr>
+				<td><code>git submodule update --init</code></td>
+				<td>Atualiza submodules</td>
+			</tr>
+			<tr>
+				<td><code>git submodule foreach git pull origin master</code></td>
+				<td>Atualiza todos os submodules</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Hooks</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git config --global core.hooksPath ~/.git-hooks</code></td>
+				<td>Configura caminho para hooks</td>
+			</tr>
+			<tr>
+				<td><code>git config --global core.hooksPath ~/.git-hooks</code></td>
+				<td>Configura caminho para hooks</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Configurações</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git config --list</code></td>
+				<td>Mostra todas as configurações</td>
+			</tr>
+			<tr>
+				<td><code>git config --global user.name "Seu Nome"</code></td>
+				<td>Configura nome de usuário global</td>
+			</tr>
+			<tr>
+				<td><code>git config --global user.email "seu@email.com"</code></td>
+				<td>Configura email global</td>
+			</tr>
+			<tr>
+				<td><code>git config --global color.ui true</code></td>
+				<td>Ativa cores nos comandos</td>
+			</tr>
+			<tr>
+				<td><code>git config --global init.defaultBranch main</code></td>
+				<td>Configura branch padrão</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Submodules</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git submodule add [url]</code></td>
+				<td>Adiciona um submodule</td>
+			</tr>
+			<tr>
+				<td><code>git submodule update --init</code></td>
+				<td>Atualiza submodules</td>
+			</tr>
+			<tr>
+				<td><code>git submodule foreach git pull origin master</code></td>
+				<td>Atualiza todos os submodules</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Hooks</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git config --global core.hooksPath ~/.git-hooks</code></td>
+				<td>Configura caminho para hooks</td>
+			</tr>
+			<tr>
+				<td><code>git config --global core.hooksPath ~/.git-hooks</code></td>
+				<td>Configura caminho para hooks</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Configurações</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git config --list</code></td>
+				<td>Mostra todas as configurações</td>
+			</tr>
+			<tr>
+				<td><code>git config --global user.name "Seu Nome"</code></td>
+				<td>Configura nome de usuário global</td>
+			</tr>
+			<tr>
+				<td><code>git config --global user.email "seu@email.com"</code></td>
+				<td>Configura email global</td>
+			</tr>
+			<tr>
+				<td><code>git config --global color.ui true</code></td>
+				<td>Ativa cores nos comandos</td>
+			</tr>
+			<tr>
+				<td><code>git config --global init.defaultBranch main</code></td>
+				<td>Configura branch padrão</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Submodules</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git submodule add [url]</code></td>
+				<td>Adiciona um submodule</td>
+			</tr>
+			<tr>
+				<td><code>git submodule update --init</code></td>
+				<td>Atualiza submodules</td>
+			</tr>
+			<tr>
+				<td><code>git submodule foreach git pull origin master</code></td>
+				<td>Atualiza todos os submodules</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Hooks</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>git config --global core.hooksPath ~/.git-hooks</code></td>
+				<td>Configura caminho para hooks</td>
+			</tr>
+			<tr>
+				<td><code>git config --global core.hooksPath ~/.git-hooks</code></td>
+				<td>Configura caminho para hooks</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📦 Comandos de Revisão de Configurações</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>config show</code></td>
+				<td>Exibe todas as configurações atuais.</td>
+			</tr>
+			<tr>
+				<td><code>config tdst</code></td>
+				<td>Lista apenas os parâmetros configurados.</td>
+			</tr>
+			<tr>
+				<td><code>config check</code></td>
+				<td>Verifica a consistência das configurações.</td>
+			</tr>
+			<tr>
+				<td><code>config diff</code></td>
+				<td>Mostra diferenças entre configurações atuais e padrão.</td>
+			</tr>
+			<p>Use com cuidado — algumas alterações podem exigir reinicialização.</p>
+		</tbody>
+	</table>
+
+	<script src="theme.js"></script>
+</body>
+
+</html>
