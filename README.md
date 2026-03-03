@@ -2,7 +2,7 @@
 
 **DevNotes** é um bloco de notas inteligente e moderno, projetado para ajudar desenvolvedores a acessarem rapidamente comandos, guias e cheat sheets essenciais para o dia a dia. Chega de perder tempo procurando no Google aquele comando do Artisan ou aquela diretiva do Blade!
 
-![Acesse e Confira aqui!](https://vitorpurcino.github.io/repositorio/) *(Ilustrativo)*
+![Acesse e Confira aqui!](https://www.flaticon.com/br/sticker-gratis/computador_6639835?term=computer&page=1&position=3&origin=search&related_id=6639835) *(Ilustrativo)*
 
 ---
 
