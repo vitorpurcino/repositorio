@@ -2,7 +2,7 @@
 
 **DevNotes** é um bloco de notas inteligente e moderno, projetado para ajudar desenvolvedores a acessarem rapidamente comandos, guias e cheat sheets essenciais para o dia a dia. Chega de perder tempo procurando no Google aquele comando do Artisan ou aquela diretiva do Blade!
 
-![Banner DevNotes](https://raw.githubusercontent.com/vitorpurcino/devnotes/main/banner.png) *(Ilustrativo)*
+![Acesse e Confira aqui!](https://vitorpurcino.github.io/repositorio/) *(Ilustrativo)*
 
 ---
 
