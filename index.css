@@ -209,6 +209,7 @@ main {
 .tag-artisan { background: rgba(244, 63, 94, 0.1); color: #fb7185; }
 .tag-git { background: rgba(56, 189, 248, 0.1); color: #38bdf8; }
 .tag-blade { background: rgba(245, 158, 11, 0.1); color: #fbbf24; }
+.tag-mysql { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
 
 .card h3 {
     font-size: 1.25rem;

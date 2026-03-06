@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="comandosMySQL.css">
+	<title>Guia Completo de MySQL — DDL, DML, JOINS, VIEWS e Funções</title>
+</head>
+
+<body>
+	<h1><a href="../index.html">📊 Guia Completo de MySQL — DDL, DML, JOINS, VIEWS e Funções</a></h1>
+
+	<div class="search-wrapper">
+		<div class="search-box">
+			<span class="search-icon">🔍</span>
+			<input type="text" id="commandSearch" placeholder="Pesquisar comando MySQL..." />
+		</div>
+	</div>
+
+	<div class="note">
+		<strong>Dica:</strong> MySQL é um SGBDR (Sistema de Gerenciamento de Banco de Dados Relacional) que segue o padrão SQL. Pressione Ctrl+F para buscar conteúdo específico nesta página.
+	</div>
+
+	<h2>📚 Conceitos Fundamentais</h2>
+	<ul>
+		<li><strong>Banco de Dados:</strong> Coleção estruturada de dados organizados em tabelas.</li>
+		<li><strong>Tabela:</strong> Estrutura com linhas (registros) e colunas (campos).</li>
+		<li><strong>Chave Primária (PK):</strong> Identifica unicamente cada registro.</li>
+		<li><strong>Chave Estrangeira (FK):</strong> Referencia a chave primária de outra tabela.</li>
+		<li><strong>Índice:</strong> Acelera buscas em grandes volumes de dados.</li>
+		<li><strong>View (Visão):</strong> Consulta armazenada que se comporta como uma tabela virtual.</li>
+		<li><strong>Transação:</strong> Sequência de operações que devem ser executadas como um bloco atômico.</li>
+	</ul>
+
+	<h2>🔤 DDL - Data Definition Language (Definição de Dados)</h2>
+	<p>DDL é utilizado para criar, modificar e remover estruturas de banco de dados.</p>
+
+	<h3>CREATE TABLE</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>CREATE TABLE usuarios (id INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(100))</code></td>
+				<td>Cria uma nova tabela com coluna de ID auto-incremento</td>
+			</tr>
+			<tr>
+				<td><code>CREATE TABLE IF NOT EXISTS usuarios (...)</code></td>
+				<td>Cria tabela apenas se não existir</td>
+			</tr>
+			<tr>
+				<td><code>CREATE TABLE produtos AS SELECT * FROM backup_produtos</code></td>
+				<td>Cria tabela copiando dados de outra tabela</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Tipos de Dados Comuns</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Tipo</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>INT</code></td>
+				<td>Número inteiro de 32 bits (-2.147.483.648 a 2.147.483.647)</td>
+				<td><code>INT</code></td>
+			</tr>
+			<tr>
+				<td><code>BIGINT</code></td>
+				<td>Número inteiro de 64 bits</td>
+				<td><code>BIGINT</code></td>
+			</tr>
+			<tr>
+				<td><code>DECIMAL(p,s)</code></td>
+				<td>Número decimal com precisão e escala</td>
+				<td><code>DECIMAL(10,2)</code> = 12345678.90</td>
+			</tr>
+			<tr>
+				<td><code>FLOAT / DOUBLE</code></td>
+				<td>Números de ponto flutuante</td>
+				<td><code>FLOAT</code>, <code>DOUBLE</code></td>
+			</tr>
+			<tr>
+				<td><code>VARCHAR(n)</code></td>
+				<td>String variável até n caracteres</td>
+				<td><code>VARCHAR(100)</code></td>
+			</tr>
+			<tr>
+				<td><code>TEXT</code></td>
+				<td>Texto grande (até 65.535 caracteres)</td>
+				<td><code>TEXT</code></td>
+			</tr>
+			<tr>
+				<td><code>DATE</code></td>
+				<td>Data no formato YYYY-MM-DD</td>
+				<td><code>2024-12-15</code></td>
+			</tr>
+			<tr>
+				<td><code>DATETIME</code></td>
+				<td>Data e hora YYYY-MM-DD HH:MM:SS</td>
+				<td><code>2024-12-15 14:30:00</code></td>
+			</tr>
+			<tr>
+				<td><code>TIMESTAMP</code></td>
+				<td>Timestamp automático (se não preenchido, usa agora)</td>
+				<td><code>TIMESTAMP DEFAULT CURRENT_TIMESTAMP</code></td>
+			</tr>
+			<tr>
+				<td><code>BOOLEAN / BOOL</code></td>
+				<td>Booleano (0 ou 1)</td>
+				<td><code>BOOLEAN</code></td>
+			</tr>
+			<tr>
+				<td><code>ENUM('valor1','valor2')</code></td>
+				<td>Lista de valores permitidos</td>
+				<td><code>ENUM('ativo','inativo')</code></td>
+			</tr>
+			<tr>
+				<td><code>JSON</code></td>
+				<td>Dados em formato JSON</td>
+				<td><code>{"chave": "valor"}</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>ALTER TABLE</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>ALTER TABLE usuarios ADD COLUMN email VARCHAR(100)</code></td>
+				<td>Adiciona uma nova coluna</td>
+			</tr>
+			<tr>
+				<td><code>ALTER TABLE usuarios DROP COLUMN email</code></td>
+				<td>Remove uma coluna</td>
+			</tr>
+			<tr>
+				<td><code>ALTER TABLE usuarios RENAME COLUMN nome TO nome_completo</code></td>
+				<td>Renomeia uma coluna</td>
+			</tr>
+			<tr>
+				<td><code>ALTER TABLE usuarios MODIFY COLUMN nome VARCHAR(150)</code></td>
+				<td>Modifica o tipo de uma coluna</td>
+			</tr>
+			<tr>
+				<td><code>ALTER TABLE usuarios ADD PRIMARY KEY (id)</code></td>
+				<td>Adiciona chave primária</td>
+			</tr>
+			<tr>
+				<td><code>ALTER TABLE usuarios ADD UNIQUE(email)</code></td>
+				<td>Adiciona constraint UNIQUE</td>
+			</tr>
+			<tr>
+				<td><code>ALTER TABLE usuarios ADD INDEX idx_email(email)</code></td>
+				<td>Cria um índice</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>DROP e TRUNCATE</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>DROP TABLE usuarios</code></td>
+				<td>Remove a tabela completamente (estrutura + dados)</td>
+			</tr>
+			<tr>
+				<td><code>DROP TABLE IF EXISTS usuarios</code></td>
+				<td>Remove a tabela apenas se existir</td>
+			</tr>
+			<tr>
+				<td><code>TRUNCATE TABLE usuarios</code></td>
+				<td>Remove todos os dados mas mantém a estrutura</td>
+			</tr>
+			<tr>
+				<td><code>DROP DATABASE banco_dados</code></td>
+				<td>Remove o banco de dados inteiro</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>✏️ DML - Data Manipulation Language (Manipulação de Dados)</h2>
+	<p>DML é utilizado para inserir, atualizar, deletar e consultar dados.</p>
+
+	<h3>INSERT - Inserindo Dados</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>INSERT INTO usuarios (id, nome, email) VALUES (1, 'João', 'joao@email.com')</code></td>
+				<td>Insere um registro completo</td>
+			</tr>
+			<tr>
+				<td><code>INSERT INTO usuarios VALUES (2, 'Maria', 'maria@email.com')</code></td>
+				<td>Insere sem especificar colunas (ordem completa)</td>
+			</tr>
+			<tr>
+				<td><code>INSERT INTO usuarios (nome, email) VALUES ('Ana', 'ana@email.com')</code></td>
+				<td>Insere apenas colunas especificadas (ID auto-incrementa)</td>
+			</tr>
+			<tr>
+				<td><code>INSERT INTO usuarios (nome, email) VALUES ('Carlos', 'carlos@email.com'), ('Diana', 'diana@email.com')</code></td>
+				<td>Insere múltiplos registros de uma vez</td>
+			</tr>
+			<tr>
+				<td><code>INSERT INTO usuarios SELECT * FROM usuarios_backup</code></td>
+				<td>Insere dados vindo de um SELECT</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>UPDATE - Atualizando Dados</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>UPDATE usuarios SET email = 'novo@email.com' WHERE id = 1</code></td>
+				<td>Atualiza email do usuário com ID 1</td>
+			</tr>
+			<tr>
+				<td><code>UPDATE usuarios SET nome = 'João Silva', email = 'joao.silva@email.com' WHERE id = 1</code></td>
+				<td>Atualiza múltiplas colunas</td>
+			</tr>
+			<tr>
+				<td><code>UPDATE usuarios SET ativo = 0 WHERE YEAR(data_criacao) < 2023</code></td>
+				<td>Atualiza com condição complexa</td>
+			</tr>
+			<tr>
+				<td><code>UPDATE usuarios SET saldo = saldo + 100 WHERE categoria = 'premium'</code></td>
+				<td>Atualiza com expressão (incremento)</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>DELETE - Deletando Dados</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>DELETE FROM usuarios WHERE id = 1</code></td>
+				<td>Delete um registro específico</td>
+			</tr>
+			<tr>
+				<td><code>DELETE FROM usuarios WHERE email LIKE '%@domain.com'</code></td>
+				<td>Delete múltiplos registros com padrão</td>
+			</tr>
+			<tr>
+				<td><code>DELETE FROM usuarios</code></td>
+				<td>Delete TODOS os registros (cuidado!)</td>
+			</tr>
+			<tr>
+				<td><code>DELETE FROM usuarios WHERE id IN (1, 2, 3)</code></td>
+				<td>Delete registros específicos por ID</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>🔍 SELECT - Consultando Dados</h2>
+
+	<h3>SELECT Básico</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>SELECT * FROM usuarios</code></td>
+				<td>Seleciona todas as colunas de todos os registros</td>
+			</tr>
+			<tr>
+				<td><code>SELECT id, nome FROM usuarios</code></td>
+				<td>Seleciona apenas ID e nome</td>
+			</tr>
+			<tr>
+				<td><code>SELECT DISTINCT categoria FROM produtos</code></td>
+				<td>Seleciona valores únicos (sem duplicatas)</td>
+			</tr>
+			<tr>
+				<td><code>SELECT * FROM usuarios LIMIT 10</code></td>
+				<td>Limita resultado a 10 registros</td>
+			</tr>
+			<tr>
+				<td><code>SELECT * FROM usuarios LIMIT 10 OFFSET 20</code></td>
+				<td>Paginação: pula 20 registros, retorna 10</td>
+			</tr>
+			<tr>
+				<td><code>SELECT * FROM usuarios ORDER BY nome ASC</code></td>
+				<td>Ordena por nome em ordem alfabética crescente</td>
+			</tr>
+			<tr>
+				<td><code>SELECT * FROM usuarios ORDER BY data_criacao DESC</code></td>
+				<td>Ordena por data em ordem decrescente</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>WHERE e Operadores de Comparação</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Operador</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>=</code></td>
+				<td>Igualdade</td>
+				<td><code>WHERE status = 'ativo'</code></td>
+			</tr>
+			<tr>
+				<td><code>!=</code> ou <code><></code></td>
+				<td>Não igual</td>
+				<td><code>WHERE status != 'inativo'</code></td>
+			</tr>
+			<tr>
+				<td><code>></code></td>
+				<td>Maior que</td>
+				<td><code>WHERE preco > 100</code></td>
+			</tr>
+			<tr>
+				<td><code><</code></td>
+				<td>Menor que</td>
+				<td><code>WHERE idade < 18</code></td>
+			</tr>
+			<tr>
+				<td><code>>=</code></td>
+				<td>Maior ou igual</td>
+				<td><code>WHERE saldo >= 50</code></td>
+			</tr>
+			<tr>
+				<td><code><=</code></td>
+				<td>Menor ou igual</td>
+				<td><code>WHERE quantidade <= 10</code></td>
+			</tr>
+			<tr>
+				<td><code>BETWEEN a AND b</code></td>
+				<td>Entre dois valores (inclusivo)</td>
+				<td><code>WHERE preco BETWEEN 50 AND 150</code></td>
+			</tr>
+			<tr>
+				<td><code>IN (...)</code></td>
+				<td>Dentro de uma lista</td>
+				<td><code>WHERE status IN ('ativo', 'pendente')</code></td>
+			</tr>
+			<tr>
+				<td><code>LIKE</code></td>
+				<td>Busca com padrão (% = qualquer caractere, _ = um caractere)</td>
+				<td><code>WHERE nome LIKE 'Jo%'</code></td>
+			</tr>
+			<tr>
+				<td><code>REGEXP</code></td>
+				<td>Expressão regular</td>
+				<td><code>WHERE email REGEXP '^[a-z]+@domain\.com$'</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Operadores Lógicos</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Operador</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>AND</code></td>
+				<td>Ambas as condições devem ser verdadeiras</td>
+				<td><code>WHERE idade > 18 AND status = 'ativo'</code></td>
+			</tr>
+			<tr>
+				<td><code>OR</code></td>
+				<td>Pelo menos uma condição deve ser verdadeira</td>
+				<td><code>WHERE categoria = 'A' OR categoria = 'B'</code></td>
+			</tr>
+			<tr>
+				<td><code>NOT</code></td>
+				<td>Inverte a condição</td>
+				<td><code>WHERE NOT status = 'inativo'</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>🔗 JOINS - Relacionando Tabelas</h2>
+	<p>JOINs combinam dados de duas ou mais tabelas baseado em uma coluna relacionada.</p>
+
+	<h3>INNER JOIN</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Tipo</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>INNER JOIN</code></td>
+				<td>Retorna apenas os registros que existem em ambas as tabelas</td>
+				<td><code>SELECT u.nome, p.titulo FROM usuarios u INNER JOIN posts p ON u.id = p.usuario_id</code></td>
+			</tr>
+			<tr>
+				<td><code>JOIN</code></td>
+				<td>Sinônimo para INNER JOIN</td>
+				<td><code>SELECT * FROM usuarios JOIN posts ON usuarios.id = posts.usuario_id</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>LEFT JOIN</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Tipo</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>LEFT JOIN</code> (LEFT OUTER JOIN)</td>
+				<td>Retorna todos os registros da tabela esquerda, mesmo que não tenham correspondência</td>
+				<td><code>SELECT u.nome, p.titulo FROM usuarios u LEFT JOIN posts p ON u.id = p.usuario_id</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>RIGHT JOIN</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Tipo</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>RIGHT JOIN</code> (RIGHT OUTER JOIN)</td>
+				<td>Retorna todos os registros da tabela direita, mesmo que não tenham correspondência</td>
+				<td><code>SELECT u.nome, p.titulo FROM usuarios u RIGHT JOIN posts p ON u.id = p.usuario_id</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>FULL OUTER JOIN</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Tipo</th>
+				<th>Descrição</th>
+				<th>Workaround MySQL</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>FULL OUTER JOIN</code></td>
+				<td>Retorna todos os registros de ambas as tabelas</td>
+				<td><code>SELECT * FROM usuarios u LEFT JOIN posts p ON u.id = p.usuario_id UNION SELECT * FROM usuarios u RIGHT JOIN posts p ON u.id = p.usuario_id</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>CROSS JOIN</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Tipo</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>CROSS JOIN</code></td>
+				<td>Produto cartesiano: combina cada linha com cada linha da outra tabela</td>
+				<td><code>SELECT * FROM cores CROSS JOIN tamanhos</code> (se 3 cores e 2 tamanhos = 6 resultados)</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>SELF JOIN</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Tipo</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>SELF JOIN</code></td>
+				<td>Join de uma tabela com ela mesma</td>
+				<td><code>SELECT e1.nome AS funcionario, e2.nome AS gerente FROM funcionarios e1 JOIN funcionarios e2 ON e1.gerente_id = e2.id</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📊 Funções de Agregação</h2>
+	<p>Estas funções retornam um valor agregado dos registros.</p>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Função</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>COUNT()</code></td>
+				<td>Conta o número de registros</td>
+				<td><code>SELECT COUNT(*) FROM usuarios</code> (conta total)</td>
+			</tr>
+			<tr>
+				<td><code>COUNT(coluna)</code></td>
+				<td>Conta não-nulos em uma coluna</td>
+				<td><code>SELECT COUNT(email) FROM usuarios</code></td>
+			</tr>
+			<tr>
+				<td><code>SUM()</code></td>
+				<td>Soma valores</td>
+				<td><code>SELECT SUM(preco) FROM produtos WHERE categoria = 'eletrônicos'</code></td>
+			</tr>
+			<tr>
+				<td><code>AVG()</code></td>
+				<td>Calcula a média</td>
+				<td><code>SELECT AVG(preco) FROM produtos</code></td>
+			</tr>
+			<tr>
+				<td><code>MIN()</code></td>
+				<td>Retorna o valor mínimo</td>
+				<td><code>SELECT MIN(preco) FROM produtos</code></td>
+			</tr>
+			<tr>
+				<td><code>MAX()</code></td>
+				<td>Retorna o valor máximo</td>
+				<td><code>SELECT MAX(preco) FROM produtos</code></td>
+			</tr>
+			<tr>
+				<td><code>GROUP_CONCAT()</code></td>
+				<td>Concatena valores separados por vírgula</td>
+				<td><code>SELECT GROUP_CONCAT(nome) FROM usuarios</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📈 GROUP BY e HAVING</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Cláusula</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>GROUP BY</code></td>
+				<td>Agrupa resultados por coluna(s)</td>
+				<td><code>SELECT categoria, COUNT(*) FROM produtos GROUP BY categoria</code></td>
+			</tr>
+			<tr>
+				<td><code>HAVING</code></td>
+				<td>Filtra grupos (como WHERE mas para agregações)</td>
+				<td><code>SELECT categoria, COUNT(*) FROM produtos GROUP BY categoria HAVING COUNT(*) > 5</code></td>
+			</tr>
+			<tr>
+				<td><code>GROUP BY ... WITH ROLLUP</code></td>
+				<td>Inclui total geral no resultado</td>
+				<td><code>SELECT categoria, COUNT(*) FROM produtos GROUP BY categoria WITH ROLLUP</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>🔷 Funções de String</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Função</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>CONCAT(str1, str2, ...)</code></td>
+				<td>Concatena strings</td>
+				<td><code>SELECT CONCAT(nome, ' - ', email) FROM usuarios</code></td>
+			</tr>
+			<tr>
+				<td><code>UPPER()</code></td>
+				<td>Converte para maiúscula</td>
+				<td><code>SELECT UPPER(nome) FROM usuarios</code></td>
+			</tr>
+			<tr>
+				<td><code>LOWER()</code></td>
+				<td>Converte para minúscula</td>
+				<td><code>SELECT LOWER(email) FROM usuarios</code></td>
+			</tr>
+			<tr>
+				<td><code>LENGTH()</code></td>
+				<td>Retorna o comprimento da string</td>
+				<td><code>SELECT nome, LENGTH(nome) FROM usuarios WHERE LENGTH(nome) > 10</code></td>
+			</tr>
+			<tr>
+				<td><code>SUBSTRING(str, pos, len)</code></td>
+				<td>Extrai substring</td>
+				<td><code>SELECT SUBSTRING(email, 1, 5) FROM usuarios</code></td>
+			</tr>
+			<tr>
+				<td><code>TRIM() / LTRIM() / RTRIM()</code></td>
+				<td>Remove espaços em branco</td>
+				<td><code>SELECT TRIM(nome) FROM usuarios</code></td>
+			</tr>
+			<tr>
+				<td><code>REPLACE(str, from, to)</code></td>
+				<td>Substitui texto</td>
+				<td><code>SELECT REPLACE(email, '@domain.com', '@newdomain.com') FROM usuarios</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>📅 Funções de Data</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Função</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>NOW()</code></td>
+				<td>Retorna data e hora atual</td>
+				<td><code>SELECT NOW()</code></td>
+			</tr>
+			<tr>
+				<td><code>CURDATE()</code></td>
+				<td>Retorna a data atual</td>
+				<td><code>SELECT CURDATE()</code></td>
+			</tr>
+			<tr>
+				<td><code>CURTIME()</code></td>
+				<td>Retorna a hora atual</td>
+				<td><code>SELECT CURTIME()</code></td>
+			</tr>
+			<tr>
+				<td><code>DATE_ADD(date, INTERVAL n UNIT)</code></td>
+				<td>Adiciona intervalo à data</td>
+				<td><code>SELECT DATE_ADD(NOW(), INTERVAL 7 DAY)</code></td>
+			</tr>
+			<tr>
+				<td><code>DATE_SUB(date, INTERVAL n UNIT)</code></td>
+				<td>Subtrai intervalo da data</td>
+				<td><code>SELECT DATE_SUB(NOW(), INTERVAL 1 MONTH)</code></td>
+			</tr>
+			<tr>
+				<td><code>DATEDIFF(date1, date2)</code></td>
+				<td>Diferença em dias entre datas</td>
+				<td><code>SELECT DATEDIFF(NOW(), data_criacao) FROM usuarios</code></td>
+			</tr>
+			<tr>
+				<td><code>YEAR() / MONTH() / DAY()</code></td>
+				<td>Extrai ano, mês ou dia</td>
+				<td><code>SELECT YEAR(data_criacao), MONTH(data_criacao) FROM usuarios</code></td>
+			</tr>
+			<tr>
+				<td><code>DATE_FORMAT(date, format)</code></td>
+				<td>Formata data</td>
+				<td><code>SELECT DATE_FORMAT(NOW(), '%d/%m/%Y')</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>🔢 Funções Matemáticas</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Função</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>ABS()</code></td>
+				<td>Valor absoluto</td>
+				<td><code>SELECT ABS(saldo) FROM contas</code></td>
+			</tr>
+			<tr>
+				<td><code>ROUND(num, decimals)</code></td>
+				<td>Arredonda número</td>
+				<td><code>SELECT ROUND(preco, 2) FROM produtos</code></td>
+			</tr>
+			<tr>
+				<td><code>CEIL() / FLOOR()</code></td>
+				<td>Arredonda para cima / para baixo</td>
+				<td><code>SELECT CEIL(3.14), FLOOR(3.14)</code></td>
+			</tr>
+			<tr>
+				<td><code>POWER(base, exp)</code></td>
+				<td>Potência (base^exp)</td>
+				<td><code>SELECT POWER(2, 3)</code> = 8</td>
+			</tr>
+			<tr>
+				<td><code>SQRT()</code></td>
+				<td>Raiz quadrada</td>
+				<td><code>SELECT SQRT(16)</code> = 4</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>❌ Tratamento de NULOS (NULL)</h2>
+	<p>NULL representa a ausência de valor. É diferente de zero, string vazia ou false.</p>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Operação</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>IS NULL</code></td>
+				<td>Verifica se valor é nulo</td>
+				<td><code>SELECT * FROM usuarios WHERE email IS NULL</code></td>
+			</tr>
+			<tr>
+				<td><code>IS NOT NULL</code></td>
+				<td>Verifica se valor NÃO é nulo</td>
+				<td><code>SELECT * FROM usuarios WHERE email IS NOT NULL</code></td>
+			</tr>
+			<tr>
+				<td><code>IFNULL(col, valor_default)</code></td>
+				<td>Retorna valor_default se col for NULL</td>
+				<td><code>SELECT IFNULL(telefone, 'Não informado') FROM usuarios</code></td>
+			</tr>
+			<tr>
+				<td><code>COALESCE(col1, col2, col3, ...)</code></td>
+				<td>Retorna o primeiro valor não-nulo</td>
+				<td><code>SELECT COALESCE(telefone, email, 'Sem contato') FROM usuarios</code></td>
+			</tr>
+			<tr>
+				<td><code>IF(condição, valor_true, valor_false)</code></td>
+				<td>Operador condicional</td>
+				<td><code>SELECT nome, IF(ativo = 1, 'Ativo', 'Inativo') FROM usuarios</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>💾 VIEWS - Consultas Armazenadas</h2>
+	<p>Uma VIEW é uma consulta virtual reutilizável que se comporta como uma tabela.</p>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Operação</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>CREATE VIEW nome_view AS SELECT ...</code></td>
+				<td>Cria uma view</td>
+				<td><code>CREATE VIEW usuarios_ativos AS SELECT * FROM usuarios WHERE ativo = 1</code></td>
+			</tr>
+			<tr>
+				<td><code>SELECT * FROM nome_view</code></td>
+				<td>Consulta uma view</td>
+				<td><code>SELECT * FROM usuarios_ativos</code></td>
+			</tr>
+			<tr>
+				<td><code>DROP VIEW nome_view</code></td>
+				<td>Remove uma view</td>
+				<td><code>DROP VIEW usuarios_ativos</code></td>
+			</tr>
+			<tr>
+				<td><code>ALTER VIEW nome_view AS SELECT ...</code></td>
+				<td>Altera uma view</td>
+				<td><code>ALTER VIEW usuarios_ativos AS SELECT id, nome FROM usuarios WHERE ativo = 1</code></td>
+			</tr>
+			<tr>
+				<td><code>SHOW VIEWS</code></td>
+				<td>Lista todas as views</td>
+				<td><code>SHOW VIEWS</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>🔍 SUBCONSULTAS</h2>
+	<p>Subconsultas são SELECT aninhados dentro de outras instruções SQL.</p>
+
+	<h3>Subconsultas em SELECT</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Tipo</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Escalar</td>
+				<td>Retorna um valor único</td>
+				<td><code>SELECT nome, (SELECT COUNT(*) FROM posts WHERE posts.usuario_id = usuarios.id) AS total_posts FROM usuarios</code></td>
+			</tr>
+			<tr>
+				<td>Lista</td>
+				<td>Retorna múltiplas linhas</td>
+				<td><code>SELECT * FROM usuarios WHERE id IN (SELECT usuario_id FROM posts)</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Subconsultas em WHERE</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Operador</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>IN</code></td>
+				<td>Valor está dentro do resultado da subconsulta</td>
+				<td><code>SELECT * FROM usuarios WHERE id IN (SELECT usuario_id FROM posts WHERE status = 'publicado')</code></td>
+			</tr>
+			<tr>
+				<td><code>NOT IN</code></td>
+				<td>Valor NÃO está no resultado</td>
+				<td><code>SELECT * FROM usuarios WHERE id NOT IN (SELECT usuario_id FROM posts)</code></td>
+			</tr>
+			<tr>
+				<td><code>EXISTS</code></td>
+				<td>Verifica se subconsulta retorna algum resultado</td>
+				<td><code>SELECT * FROM usuarios WHERE EXISTS (SELECT 1 FROM posts WHERE posts.usuario_id = usuarios.id)</code></td>
+			</tr>
+			<tr>
+				<td><code>NOT EXISTS</code></td>
+				<td>Verifica se subconsulta NÃO retorna resultado</td>
+				<td><code>SELECT * FROM usuarios WHERE NOT EXISTS (SELECT 1 FROM posts WHERE posts.usuario_id = usuarios.id)</code></td>
+			</tr>
+			<tr>
+				<td><code>=, >, <, >=, <=, !=</code></td>
+				<td>Comparação com resultado escalar</td>
+				<td><code>SELECT * FROM produtos WHERE preco > (SELECT AVG(preco) FROM produtos)</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>🔄 UNION e UNION ALL</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Operador</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>UNION</code></td>
+				<td>Combina resultados de duas consultas (sem duplicatas)</td>
+				<td><code>SELECT nome FROM usuarios UNION SELECT titulo FROM posts</code></td>
+			</tr>
+			<tr>
+				<td><code>UNION ALL</code></td>
+				<td>Combina resultados (mantém duplicatas)</td>
+				<td><code>SELECT nome FROM usuarios_2023 UNION ALL SELECT nome FROM usuarios_2024</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>⚙️ Operações com CASE</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Sintaxe</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>CASE WHEN ... THEN ... ELSE ... END</code></td>
+				<td>Lógica condicional no SELECT</td>
+				<td><code>SELECT nome, CASE WHEN idade < 18 THEN 'Menor' ELSE 'Maior' END FROM usuarios</code></td>
+			</tr>
+			<tr>
+				<td><code>CASE expr WHEN val1 THEN result1 ...</code></td>
+				<td>CASE simples</td>
+				<td><code>SELECT CASE status WHEN 1 THEN 'Ativo' WHEN 0 THEN 'Inativo' END FROM usuarios</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>🔐 Transações (TRANSACTIONS)</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Comando</th>
+				<th>Descrição</th>
+				<th>Exemplo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>START TRANSACTION</code> ou <code>BEGIN</code></td>
+				<td>Inicia uma transação</td>
+				<td><code>START TRANSACTION;</code></td>
+			</tr>
+			<tr>
+				<td><code>COMMIT</code></td>
+				<td>Confirma (salva) a transação</td>
+				<td><code>COMMIT;</code></td>
+			</tr>
+			<tr>
+				<td><code>ROLLBACK</code></td>
+				<td>Desfaz a transação</td>
+				<td><code>ROLLBACK;</code></td>
+			</tr>
+			<tr>
+				<td><code>SAVEPOINT nome</code></td>
+				<td>Cria um ponto de salvação</td>
+				<td><code>SAVEPOINT sp1; ... ROLLBACK TO sp1;</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<pre>-- Exemplo de Transação
+START TRANSACTION;
+UPDATE contas SET saldo = saldo - 100 WHERE id = 1;
+UPDATE contas SET saldo = saldo + 100 WHERE id = 2;
+COMMIT; -- Se ambas as operações completarem com sucesso</pre>
+
+	<h2>📋 Exemplo Prático Completo</h2>
+	<pre>-- Criar tabelas relacionadas
+CREATE TABLE usuarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE posts (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    usuario_id INT NOT NULL,
+    titulo VARCHAR(200) NOT NULL,
+    conteudo TEXT,
+    data_publicacao DATE,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+-- Inserir dados
+INSERT INTO usuarios (nome, email) VALUES 
+    ('João Silva', 'joao@email.com'),
+    ('Maria Santos', 'maria@email.com');
+
+INSERT INTO posts (usuario_id, titulo, conteudo, data_publicacao) VALUES
+    (1, 'SQL Básico', 'Aprenda o básico de SQL...', '2024-01-15'),
+    (1, 'MySQL Avançado', 'Técnicas avançadas...', '2024-02-10'),
+    (2, 'Database Design', 'Design de banco de dados...', '2024-01-20');
+
+-- Consulta com JOIN e agregação
+SELECT 
+    u.nome,
+    COUNT(p.id) AS total_posts,
+    MAX(p.data_publicacao) AS ultimo_post
+FROM usuarios u
+LEFT JOIN posts p ON u.id = p.usuario_id
+GROUP BY u.id, u.nome
+HAVING COUNT(p.id) > 0
+ORDER BY total_posts DESC;</pre>
+
+	<h2>💡 Boas Práticas</h2>
+	<ul>
+		<li><strong>Use PRIMARY KEY:</strong> Sempre defina uma chave primária para cada tabela.</li>
+		<li><strong>Use FOREIGN KEY:</strong> Manter integridade referencial entre tabelas.</li>
+		<li><strong>Evite valores NULL quando possível:</strong> Use DEFAULT ou NOT NULL.</li>
+		<li><strong>Normalize dados:</strong> Avoid duplicação desnecessária.</li>
+		<li><strong>Use índices com sabedoria:</strong> Índices aceleram buscas mas desaceleram inserções.</li>
+		<li><strong>Use LIMIT em testes:</strong> Sempre teste queries com LIMIT antes de executar sem limite.</li>
+		<li><strong>Comente queries complexas:</strong> Facilita manutenção posterior.</li>
+		<li><strong>Use transações para operações críticas:</strong> Garante atomicidade de múltiplas operações.</li>
+		<li><strong>Valide dados no código antes de INSERT:</strong> Previne dados inválidos no banco.</li>
+		<li><strong>Use EXPLAIN para otimizar queries:</strong> <code>EXPLAIN SELECT ...</code> mostra plano de execução.</li>
+	</ul>
+
+	<div class="note">
+		<strong>🚀 Próximos Passos:</strong> Pratique criando seu próprio banco de dados, experimente JOINs com múltiplas tabelas, e domine VIEWS e subconsultas!
+	</div>
+
+	<script src="theme.js"></script>
+	<script>
+		document.getElementById('commandSearch').addEventListener('keyup', function(e) {
+			const searchTerm = e.target.value.toLowerCase();
+			const tables = document.querySelectorAll('table');
+			const sections = document.querySelectorAll('h2, h3');
+
+			sections.forEach(section => {
+				section.style.display = 'block';
+			});
+
+			tables.forEach(table => {
+				const rows = table.querySelectorAll('tbody tr');
+				let visibleRows = 0;
+
+				rows.forEach(row => {
+					const text = row.textContent.toLowerCase();
+					if (text.includes(searchTerm)) {
+						row.style.display = '';
+						visibleRows++;
+					} else {
+						row.style.display = 'none';
+					}
+				});
+
+				table.style.display = visibleRows > 0 ? '' : 'none';
+			});
+		});
+	</script>
+</body>
+
+</html>
